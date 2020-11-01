@@ -1,0 +1,146 @@
+#!/data/data/com.termux/files/usr/bin/bash
+### made by @wmcbtech30
+### this will prepend all the functions needed for installation
+### It will create shortcuts, if termux xfce is installed. DebDroid will use the alternate command
+set -e -u
+
+### Check if Network Connection is present
+if ping -c 1 8.8.8.8 >/dev/null 2>&1; then
+    true
+else
+    echo "Cannot continue the installation. Please Check your network connection"
+    exit 2
+fi
+
+### In case the script run inside the distribution. check for common hiarchery files
+if [ ! -e /usr/lib/.libdone.so.9 ]; then
+    true
+else
+    echo "We detected that you are running it inside the distro: incorrect syntax"
+    exit 2
+fi
+
+if [ ! -e /usr/ ]; then
+    true
+else
+    echo "We detected that you are running it inside the distro: incorrect syntax"
+    exit 2
+fi
+
+### At this point check for curl command. if not installed. ask a user to install it then abort
+if which curl >/dev/null 2>&1; then
+    true
+else
+    echo "Cannot find command 'curl'. Please install it by typing 'pkg in curl'"
+    exit 2
+fi
+
+### Next is to check if debdroid is installed
+if which debdroid >/dev/null 2>&1; then
+    true
+else
+    echo "Cannot install DebDroid. Please Install it"
+    exit 2
+fi
+
+### This time. Check if Debian is installed
+if debdroid -- true >/dev/null 2>&1; then
+    true
+else
+    echo "It seems Debian isn't installed. Please Install it"
+    exit 2
+fi
+
+### Other Distributions isn't supported yet. check if apt is present
+if debdroid -- which apt >/dev/null 2>&1; then
+    true
+else
+    echo "It seems you're using a custom distributions which is not supported yet. please use Debian Instead"
+    exit 2
+fi
+
+### If it's already installed. ask a user
+if ! which startlxqt >/dev/null 2>&1 &
+    true
+else
+    echo "The command 'startlxqt' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/startlxqt'"
+    exit 2
+fi
+
+### Function Time
+install_lxqt() {
+    if ! debdroid -- which startlxqt; then
+        echo "Installing LXQT base package... "
+        debdroid -- sudo apt install lxqt openbox kwin -yy
+        setup_tigervnc
+    else
+        echo "Found lxqt package. Skipping Install and Performing an autoconfiguration to tigervnc"
+        setup_tigervnc
+    fi
+}
+
+setup_tigervnc() {
+    if ! debdroid -- which tigervncserver; then
+        echo "Installing tigervnc package"
+        debdroid -- sudo apt install tigervnc-standalone-server -yy
+        perform_config
+    else
+        echo "Found tigervnc package. Skipping Install and Performing an final autoconfiguration"
+        perform_config
+    fi
+}
+
+perform_config()
+{ 
+    echo ""
+    echo "Downloading the wrapper script..."
+    echo ""
+    curl -O --retry 5 --output-dir $PREFIX/bin/ https://this.section.is.incomplete/please.improve.it
+    echo ""
+    echo "Finalizing..."
+    finalize
+}
+
+finalize() {
+    echo "LXQT successfully installed. All has gone well"
+    echo "To start lxqt type:"
+    echo ""
+    echo "startlxqt"
+    echo ""
+    exit 0
+}
+
+delete-script() {
+    if [ -e $PREFIX/bin/startlxqt ]; then
+        echo "Removing the wrapper script"
+        rm -rf $PREFIX/bin/startlxqt >/dev/null 2>&1
+        echo "Done"
+    else
+        echo "Operation completed with errors: no such file or directory"
+        exit 2
+    fi
+}
+
+show_usage(){
+    echo "setup-debdroid-lxqt: a Wrapper and Friendly script to installs a Desktop Environment Easily"
+    echo ""
+    echo "Options: "
+    echo "  -i      Installs an LXQT Desktop Environment"
+    echo "  -r -rm  Removes a script but not the desktop environment itself"
+    echo ""
+    echo "By Default. if no options is specified. this will install lxqt"
+}
+
+if [ $# = 0 ]; then
+	install_lxqt
+fi
+
+CMD="$1"
+shift 1
+
+case "$CMD" in
+    -i*) install_lxqt;;
+    -r*|-rm|--remove*) delete-script;;
+    -h*|--help*) show_usage;;
+	*) echo "Unknown Command: '$CMD'"; exit 2;;
+esac
