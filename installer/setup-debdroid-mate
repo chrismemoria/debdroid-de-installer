@@ -60,7 +60,7 @@ else
 fi
 
 ### If it's already installed. ask a user
-if ! which mate-session >/dev/null 2>&1 &
+if ! which mate-session >/dev/null 2>&1; then
     true
 else
     echo "The command 'mate-session' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/mate-session'"
