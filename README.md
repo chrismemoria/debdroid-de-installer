@@ -29,3 +29,12 @@ After Installation. you can type some commands: \
 
 # Uninstalling
 To uninstall it. simply remove the wrapper scripts and you're done
+
+# Common Problems
+If you encountered this error:
+```
+Another Instance of VNC Server running at port 5951. Please Close it
+```
+
+Simply close it by typing: \
+`killall Xvnc`
