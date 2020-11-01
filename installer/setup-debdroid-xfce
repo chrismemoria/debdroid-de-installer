@@ -95,7 +95,8 @@ perform_config()
     echo ""
     echo "Downloading the wrapper script..."
     echo ""
-    curl -O --retry 5 --output-dir $PREFIX/bin/ https://this.section.is.incomplete/please.improve.it
+    curl -O --retry 5 --output-dir $PREFIX/bin/ https://raw.githubusercontent.com/WMCB-Tech/debdroid-de-installer/main/bin/debdroid-startxfce4
+    chmod 777 $PREFIX/bin/debdroid-startxfce4
     echo ""
     echo "Finalizing..."
     finalize
