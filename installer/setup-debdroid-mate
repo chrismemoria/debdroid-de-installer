@@ -4,6 +4,20 @@
 ### It will create shortcuts, if termux xfce is installed. DebDroid will use the alternate command
 set -e -u
 
+if [ $# = 0 ]; then
+	install_mate
+fi
+
+CMD="$1"
+shift 1
+
+case "$CMD" in
+    -i*) install_mate;;
+    -r*|-rm|--remove*) delete-script;;
+    -h*|--help*) show_usage;;
+	*) echo "Unknown Command: '$CMD'"; exit 2;;
+esac
+
 ### Check if Network Connection is present
 if ping -c 1 8.8.8.8 >/dev/null 2>&1; then
     true
@@ -131,17 +145,3 @@ show_usage(){
     echo ""
     echo "By Default. if no options is specified. this will install mate"
 }
-
-if [ $# = 0 ]; then
-	install_mate
-fi
-
-CMD="$1"
-shift 1
-
-case "$CMD" in
-    -i*) install_mate;;
-    -r*|-rm|--remove*) delete-script;;
-    -h*|--help*) show_usage;;
-	*) echo "Unknown Command: '$CMD'"; exit 2;;
-esac
