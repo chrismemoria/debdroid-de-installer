@@ -60,7 +60,7 @@ else
 fi
 
 ### If it's already installed. ask a user
-if ! which startlxde >/dev/null 2>&1 &
+if ! which startlxde >/dev/null 2>&1; then
     true
 else
     echo "The command 'startlxde' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/startlxde'"
