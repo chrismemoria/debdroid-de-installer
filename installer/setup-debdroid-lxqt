@@ -111,37 +111,4 @@ finalize() {
     exit 0
 }
 
-delete-script() {
-    if [ -e $PREFIX/bin/startlxqt ]; then
-        echo "Removing the wrapper script"
-        rm -rf $PREFIX/bin/startlxqt >/dev/null 2>&1
-        echo "Done"
-    else
-        echo "Operation completed with errors: no such file or directory"
-        exit 2
-    fi
-}
-
-show_usage(){
-    echo "setup-debdroid-lxqt: a Wrapper and Friendly script to installs a Desktop Environment Easily"
-    echo ""
-    echo "Options: "
-    echo "  -i      Installs an LXQT Desktop Environment"
-    echo "  -r -rm  Removes a script but not the desktop environment itself"
-    echo ""
-    echo "By Default. if no options is specified. this will install lxqt"
-}
-
-if [ $# = 0 ]; then
-	install_lxqt
-fi
-
-CMD="$1"
-shift 1
-
-case "$CMD" in
-    -i*) install_lxqt;;
-    -r*|-rm|--remove*) delete-script;;
-    -h*|--help*) show_usage;;
-	*) echo "Unknown Command: '$CMD'"; exit 2;;
-esac
+install_lxde
