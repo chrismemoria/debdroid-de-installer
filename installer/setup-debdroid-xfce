@@ -4,20 +4,6 @@
 ### It will create shortcuts, if termux xfce is installed. DebDroid will use the alternate command
 set -e -u
 
-if [ $# = 0 ]; then
-	install_xfce
-fi
-
-CMD="$1"
-shift 1
-
-case "$CMD" in
-    -i*) install_xfce;;
-    -r*|-rm|--remove*) delete-script;;
-    -h*|--help*) show_usage;;
-	*) echo "Unknown Command: '$CMD'"; exit 2;;
-esac
-
 ### Check if Network Connection is present
 if ping -c 1 8.8.8.8 >/dev/null 2>&1; then
     true
@@ -125,23 +111,4 @@ finalize() {
     exit 0
 }
 
-delete-script() {
-    if [ -e $PREFIX/bin/debdroid-startxfce4 ]; then
-        echo "Removing the wrapper script"
-        rm -rf $PREFIX/bin/debdroid-startxfce4 >/dev/null 2>&1
-        echo "Done"
-    else
-        echo "Operation completed with errors: no such file or directory"
-        exit 2
-    fi
-}
-
-show_usage(){
-    echo "setup-debdroid-xfce: a Wrapper and Friendly script to installs a Desktop Environment Easily"
-    echo ""
-    echo "Options: "
-    echo "  -i      Installs an XFCE Desktop Environment"
-    echo "  -r -rm  Removes a script but not the desktop environment itself"
-    echo ""
-    echo "By Default. if no options is specified. this will install xfce"
-}
+install_xfce
