@@ -1,6 +1,6 @@
 # DebDroid DE Installer
 An Easy to use DE Installer for DebDroid. \
-This is more of a Wrapper scripts. but gives a shortcuts and installs it to termux \
+This is more of a Wrapper scripts. but gives a shortcuts and installs it to termux 
 
 Issues are disabled here so make an issue on the main DebDroid repository instead
 
