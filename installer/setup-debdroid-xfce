@@ -60,7 +60,7 @@ else
 fi
 
 ### If it's already installed. ask a user
-if ! which debdroid-startxfce4 >/dev/null 2>&1 &
+if ! which debdroid-startxfce4 >/dev/null 2>&1; then
     true
 else
     echo "The command 'debdroid-startxfce4' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/debdroid-startxfce4'"
