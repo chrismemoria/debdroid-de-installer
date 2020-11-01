@@ -1,0 +1,22 @@
+#!/data/data/com.termux/files/usr/bin/bash
+### A shortcut to start lxde
+
+### Check for Socket and Lock Files
+if [ ! -S $PREFIX/tmp/.X11-unix/X51 ]; then
+    true
+else
+    echo "Another Instance of VNC Server running at port 5951. Please Close it"
+    exit 2
+fi
+
+if [ ! -e $PREFIX/tmp/.X51-lock ]; then
+    true
+else
+    echo "Another Instance of VNC Server running at port 5951. Please Close it"
+    exit 2
+fi
+
+### Start the VNC Server
+termux-open vnc://localhost:5951 || true
+debdroid -- Xvnc -SecurityTypes none :51 &
+debdroid -- env DISPLAY=:51 mate-session
