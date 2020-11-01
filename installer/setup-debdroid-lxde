@@ -110,37 +110,4 @@ finalize() {
     exit 0
 }
 
-delete-script() {
-    if [ -e $PREFIX/bin/startlxde ]; then
-        echo "Removing the wrapper script"
-        rm -rf $PREFIX/bin/startlxde >/dev/null 2>&1
-        echo "Done"
-    else
-        echo "Operation completed with errors: no such file or directory"
-        exit 2
-    fi
-}
-
-show_usage(){
-    echo "setup-debdroid-lxde: a Wrapper and Friendly script to installs a Desktop Environment Easily"
-    echo ""
-    echo "Options: "
-    echo "  -i      Installs an LXDE Desktop Environment"
-    echo "  -r -rm  Removes a script but not the desktop environment itself"
-    echo ""
-    echo "By Default. if no options is specified. this will install lxde"
-}
-
-if [ $# = 0 ]; then
-	install_lxde
-fi
-
-CMD="$1"
-shift 1
-
-case "$CMD" in
-    -i*) install_lxde;;
-    -r*|-rm|--remove*) delete-script;;
-    -h*|--help*) show_usage;;
-	*) echo "Unknown Command: '$CMD'"; exit 2;;
-esac
+install_lxde
