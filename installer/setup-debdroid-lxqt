@@ -111,4 +111,4 @@ finalize() {
     exit 0
 }
 
-install_lxde
+install_lxqt
