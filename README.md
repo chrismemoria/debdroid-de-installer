@@ -9,7 +9,7 @@ You will need:
 * `curl` package
 * `debdroid` (kinda duh)
 
-Download an Install the installer scripts: \
+Download an Install the installer scripts:
 * [XFCE](https://raw.githubusercontent.com/WMCB-Tech/debdroid-de-installer/main/installer/setup-debdroid-xfce)
 * [LXDE](https://raw.githubusercontent.com/WMCB-Tech/debdroid-de-installer/main/installer/setup-debdroid-lxde)
 * [MATE](https://raw.githubusercontent.com/WMCB-Tech/debdroid-de-installer/main/installer/setup-debdroid-mate)
