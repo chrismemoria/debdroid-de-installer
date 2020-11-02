@@ -9,7 +9,7 @@ else
   exit 2
 fi
 
-### Check if XFCE is installed
+### Check if LXDE is installed
 if debdroid -- which startlxde >/dev/null 2>&1; then
   true
 else
