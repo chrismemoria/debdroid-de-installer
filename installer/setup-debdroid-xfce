@@ -63,7 +63,7 @@ fi
 if ! which startxfce >/dev/null 2>&1; then
     true
 else
-    echo "The command 'startxfce' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/debdroid-startxfce'"
+    echo "The command 'startxfce' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/startxfce'"
     exit 2
 fi
 
