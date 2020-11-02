@@ -69,7 +69,7 @@ fi
 
 ### Function Time
 install_mate() {
-    if ! debdroid -- which mate-session; then
+    if ! debdroid -- which mate-session >/dev/null 2>&1; then
         echo "Installing MATE base package... "
         debdroid -- sudo apt install mate -yy
         setup_tigervnc
@@ -80,7 +80,7 @@ install_mate() {
 }
 
 setup_tigervnc() {
-    if ! debdroid -- which tigervncserver; then
+    if ! debdroid -- which tigervncserver >/dev/null 2>&1; then
         echo "Installing tigervnc package"
         debdroid -- sudo apt install tigervnc-standalone-server -yy
         perform_config
