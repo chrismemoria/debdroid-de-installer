@@ -60,16 +60,16 @@ else
 fi
 
 ### If it's already installed. ask a user
-if ! which debdroid-startxfce4 >/dev/null 2>&1; then
+if ! which startxfce >/dev/null 2>&1; then
     true
 else
-    echo "The command 'debdroid-startxfce4' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/debdroid-startxfce4'"
+    echo "The command 'startxfce' is installed. to reinstall it. simply delete it by typing 'rm -rf $PREFIX/bin/debdroid-startxfce'"
     exit 2
 fi
 
 ### Function Time
 install_xfce() {
-    if ! debdroid -- which startxfce4; then
+    if ! debdroid -- which startxfce4 >/dev/null 2>&1; then
         echo "Installing Xfce4 base package... "
         debdroid -- sudo apt install xfce4 -yy
         setup_tigervnc
@@ -80,7 +80,7 @@ install_xfce() {
 }
 
 setup_tigervnc() {
-    if ! debdroid -- which tigervncserver; then
+    if ! debdroid -- which tigervncserver > /dev/null 2>&1; then
         echo "Installing tigervnc package"
         debdroid -- sudo apt install tigervnc-standalone-server -yy
         perform_config
@@ -95,8 +95,8 @@ perform_config()
     echo ""
     echo "Downloading the wrapper script..."
     echo ""
-    curl -O --retry 5 --output-dir $PREFIX/bin/ https://raw.githubusercontent.com/WMCB-Tech/debdroid-de-installer/main/bin/debdroid-startxfce4
-    chmod 777 $PREFIX/bin/debdroid-startxfce4
+    curl -O --retry 5 --output-dir $PREFIX/bin/ https://raw.githubusercontent.com/WMCB-Tech/debdroid-de-installer/main/bin/startxfce
+    chmod 777 $PREFIX/bin/startxfce
     echo ""
     echo "Finalizing..."
     finalize
@@ -106,7 +106,7 @@ finalize() {
     echo "XFCE successfully installed. All has gone well"
     echo "To start xfce type:"
     echo ""
-    echo "debdroid-startxfce4"
+    echo "startxfce"
     echo ""
     exit 0
 }
