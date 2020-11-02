@@ -1,6 +1,22 @@
 #!/data/data/com.termux/files/usr/bin/bash
 ### A shortcut to start lxde
 
+### Check if DebDroid is installed
+if debdroid -- true >/dev/null 2>&1; then
+  true
+else
+  echo "It seems DebDroid isn't installed. Please Install it"
+  exit 2
+fi
+
+### Check if XFCE is installed
+if debdroid -- which startlxde >/dev/null 2>&1; then
+  true
+else
+  echo "LXDE Isn't Installed. Please install it"
+  exit 2
+ fi
+
 ### Check for Socket and Lock Files
 if [ ! -S $PREFIX/tmp/.X11-unix/X51 ]; then
     true
