@@ -17,6 +17,14 @@ else
   exit 2
 fi
 
+### Check if TigerVNC is installed
+if debdroid -- which tigervncserver >/dev/null 2>&1; then
+    true
+else
+    echo "TigerVNC isn't installed. Please Install it"
+    exit 2
+fi
+
 ### Check for Socket and Lock Files
 if [ ! -S $PREFIX/tmp/.X11-unix/X51 ]; then
     true
