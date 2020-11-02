@@ -21,8 +21,8 @@ Once you downloaded it. don't forget to chmod it: \
 And execute it.
 
 # Starting
-After Installation. you can type some commands: \
-* XFCE - `debdroid-startxfce4`
+After Installation. you can type some commands:
+* XFCE - `startxfce`
 * MATE - `mate-session`
 * LXDE - `startlxde`
 * LXQT - `startlxqt`
